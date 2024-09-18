@@ -1,0 +1,64 @@
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Other head elements like meta tags, title, etc. -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/admin/admin-home">HireBike</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="adminNavbar">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/add-bike">Add Bike</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/manage-bikes">Manage Bikes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/manage-bookings">Manage Bookings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/manage-users">View Users</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link btn btn-danger text-white" href="/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <div class="card shadow-lg">
+    <div class="card-header bg-primary text-white">
+      <h2 class="mb-0">Add a New Bike</h2>
+    </div>
+    <div class="card-body">
+      <form action="/admin/add-bike" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="model" class="form-label">Bike Model</label>
+          <input type="text" class="form-control" id="model" name="model" placeholder="Enter bike model" required>
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label">Price Per Day (₹)</label>
+          <input type="number" class="form-control" id="price" name="pricePerDay" placeholder="Enter price per day" required>
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Bike Image</label>
+          <input type="file" class="form-control" id="image" name="image" required>
+        </div>
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-success btn-lg">Add Bike</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
