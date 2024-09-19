@@ -59,16 +59,19 @@
   function calculateTotalPrice() {
     const startDate = new Date(startDateInput.value);
     const endDate = new Date(endDateInput.value);
-    
-    // Adjust time to match 12:00 AM for the start date and 11:59 AM for the end date
-    startDate.setHours(0, 0, 0, 0); // Set start time to 12:00 AM
-    endDate.setHours(11, 59, 0, 0); // Set end time to 11:59 AM
 
-    const timeDiff = endDate - startDate;
-    const days = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Always round up to the next full day
-    const totalPrice = days * pricePerDay;
+    // Ensure both dates are selected
+    if (startDate && endDate && endDate >= startDate) {
+      // Calculate total days, inclusive of the start and end date
+      const timeDiff = endDate - startDate;
+      const days = timeDiff / (1000 * 3600 * 24) + 1; // Adding 1 to include the start date
 
-    totalPriceElement.textContent = totalPrice > 0 ? totalPrice : 0;
+      // Calculate total price
+      const totalPrice = days * pricePerDay;
+      totalPriceElement.textContent = totalPrice > 0 ? totalPrice : 0;
+    } else {
+      totalPriceElement.textContent = 0;
+    }
   }
 
   startDateInput.addEventListener('change', calculateTotalPrice);

@@ -57,16 +57,23 @@
           <td>₹<%= booking.totalPrice %></td>
           <td><%= booking.status.charAt(0).toUpperCase() + booking.status.slice(1) %></td>
           <td>
-            <% if (booking.status === 'accepted' && now < startDate) { %>
-              <form action="/user/cancel-booking/<%= booking._id %>" method="POST">
-                <button type="submit" class="btn btn-danger btn-sm">Cancel Booking</button>
-              </form>
+            <% if (booking.status === 'rejected') { %>
+              <span class="badge bg-danger">Rejected</span>
+            <% } else if (booking.status === 'cancelled') { %>
+              <span class="badge bg-secondary">Cancelled</span>
+            <% } else if (booking.status === 'accepted') { %>
+              <% if (now < startDate) { %>
+                <form action="/user/cancel-booking/<%= booking._id %>" method="POST">
+                  <button type="submit" class="btn btn-danger btn-sm">Cancel Booking</button>
+                </form>
+              <% } else { %>
+                <span class="badge bg-success">Accepted</span>
+              <% } %>
             <% } else if (booking.status === 'pending') { %>
               <span class="badge bg-warning">Pending</span>
-            <% } else { %>
-              <span class="badge bg-success">Accepted</span>
             <% } %>
           </td>
+          
         </tr>
       <% }) %>
     </tbody>

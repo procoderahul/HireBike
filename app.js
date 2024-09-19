@@ -241,7 +241,7 @@ app.post('/user/book-bike/:bikeId', async (req, res) => {
     const bike = await Bike.findById(req.params.bikeId);
     
     const timeDiff = new Date(endDate) - new Date(startDate);
-    const days = timeDiff / (1000 * 3600 * 24);
+    const days = timeDiff / (1000 * 3600 * 24) +1;
     const totalPrice = days * bike.pricePerDay;
     
     const newBooking = new Booking({
